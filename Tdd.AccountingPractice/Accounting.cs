@@ -22,11 +22,15 @@ namespace Tdd.AccountingPractice
 
             foreach (var budget in budgets)
             {
-                var effectiveDays = period.EffectiveDays(budget.CreatePeriod());
-                totalAmount += budget.DailyAmount() * effectiveDays;
+                totalAmount += EffectiveAmount(budget, period);
             }
 
             return totalAmount;
+        }
+
+        private static int EffectiveAmount(Budget budget, Period period)
+        {
+            return budget.DailyAmount() * period.EffectiveDays(budget.CreatePeriod());
         }
 
         private bool IsValid(DateTime start, DateTime end)
