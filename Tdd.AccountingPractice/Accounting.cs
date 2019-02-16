@@ -14,6 +14,11 @@ namespace Tdd.AccountingPractice
 
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
+
+        public int EffectiveDays()
+        {
+            return (End - Start).Days + 1;
+        }
     }
 
     public class Accounting
@@ -40,7 +45,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var effectiveDays = EffectiveDays(new Period(start, end));
+                var effectiveDays = new Period(start, end).EffectiveDays();
 
                 return CalculateAmount(budget.DailyAmount(), effectiveDays);
             }
@@ -140,11 +145,6 @@ namespace Tdd.AccountingPractice
         private Budget GetBudget(DateTime start, IEnumerable<Budget> budgets)
         {
             return budgets.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
-        }
-
-        private static int EffectiveDays(Period period)
-        {
-            return (period.End - period.Start).Days + 1;
         }
 
         private int GetDayInTargetMonth(DateTime targetDateTime)
