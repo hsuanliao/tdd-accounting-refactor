@@ -29,7 +29,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                return CalculateAmount(budget.DailyAmount(), period.EffectiveDays());
+                return budget.DailyAmount() * period.EffectiveDays();
             }
 
             var totalAmount = 0;
@@ -112,11 +112,6 @@ namespace Tdd.AccountingPractice
         private bool IsSameMonth(DateTime start, DateTime end)
         {
             return start.ToString("yyyyMM") == end.ToString("yyyyMM");
-        }
-
-        private int CalculateAmount(int dailyAmount, int effectiveDays)
-        {
-            return dailyAmount * effectiveDays;
         }
 
         private bool IsValid(DateTime start, DateTime end)
