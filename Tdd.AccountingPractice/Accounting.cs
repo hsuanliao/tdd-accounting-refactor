@@ -51,7 +51,8 @@ namespace Tdd.AccountingPractice
                 var budget = GetTargetBudget(budgets, targetDateTime);
                 if (budget != null)
                 {
-                    var monthOfDays = GetDayInTargetMonth(targetDateTime);
+                    var monthOfDays = budget.Days();
+                    //var monthOfDays = GetDayInTargetMonth(targetDateTime);
                     var dailyAmount = budget.DailyAmount();
                     var targetAmount = 0;
                     targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, targetAmount, dailyAmount,
