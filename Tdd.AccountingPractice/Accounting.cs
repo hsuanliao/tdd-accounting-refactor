@@ -37,10 +37,12 @@ namespace Tdd.AccountingPractice
             var totalAmount = 0;
 
             var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
-            for (int i = 0; i < monthsInTargetRange + 1; i++)
+            //for (int i = 0; i < monthsInTargetRange + 1; i++)
+            foreach (var budget in budgets)
             {
-                var currentMonth = period.Start.AddMonths(i);
-                var budget = GetBudget(currentMonth, budgets);
+                //var currentMonth = period.Start.AddMonths(i);
+                //var budget = GetBudget(currentMonth, budgets);
+                var currentMonth = budget.FirstDay();
                 DateTime effectiveStart;
                 DateTime effectiveEnd;
                 if (budget != null)
