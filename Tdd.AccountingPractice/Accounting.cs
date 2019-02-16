@@ -29,9 +29,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var effectiveDays = period.EffectiveDays();
-
-                return CalculateAmount(budget.DailyAmount(), effectiveDays);
+                return CalculateAmount(budget.DailyAmount(), period.EffectiveDays());
             }
 
             var totalAmount = 0;
