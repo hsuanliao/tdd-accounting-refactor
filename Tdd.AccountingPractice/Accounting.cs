@@ -56,10 +56,12 @@ namespace Tdd.AccountingPractice
             for (int i = 1; i < monthsInTargetRange; i++)
             {
                 var budget = GetBudget(period.Start.AddMonths(i), budgets);
+                DateTime effectiveStart;
+                DateTime effectiveEnd;
                 if (budget != null)
                 {
-                    var effectiveStart = budget.FirstDay();
-                    var effectiveEnd = budget.LastDay();
+                    effectiveStart = budget.FirstDay();
+                    effectiveEnd = budget.LastDay();
                     totalAmount += budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
                 }
             }
