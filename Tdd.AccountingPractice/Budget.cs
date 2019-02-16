@@ -33,5 +33,10 @@ namespace Tdd.AccountingPractice
         {
             return new Period(FirstDay(), LastDay());
         }
+
+        public int EffectiveAmount(Period period)
+        {
+            return DailyAmount() * period.EffectiveDays(CreatePeriod());
+        }
     }
 }
