@@ -48,6 +48,14 @@ namespace Tdd.AccountingPractice
             var firstAmount = FirstMonthAmount(budgets, period);
             totalAmount += firstAmount;
 
+            var lastAmount = LastMonthAmount(budgets, period);
+            totalAmount += lastAmount;
+
+            return totalAmount;
+        }
+
+        private int LastMonthAmount(IEnumerable<Budget> budgets, Period period)
+        {
             var budgetOfEnd = GetTargetBudget(budgets, period.End);
             int lastAmount = 0;
             if (budgetOfEnd != null)
@@ -55,9 +63,7 @@ namespace Tdd.AccountingPractice
                 lastAmount = GetTargetAmount(period.End, period, budgetOfEnd);
             }
 
-            totalAmount += lastAmount;
-
-            return totalAmount;
+            return lastAmount;
         }
 
         private int FirstMonthAmount(IEnumerable<Budget> budgets, Period period)
