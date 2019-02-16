@@ -52,9 +52,9 @@ namespace Tdd.AccountingPractice
                 if (budget != null)
                 {
                     var monthOfDays = GetDayInTargetMonth(targetDateTime);
-                    var unitOfDay = budget.Amount / monthOfDays;
+                    var dailyAmount = budget.DailyAmount();
                     var targetAmount = 0;
-                    targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, targetAmount, unitOfDay,
+                    targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, targetAmount, dailyAmount,
                         monthOfDays);
                     totalAmount += targetAmount;
                 }
