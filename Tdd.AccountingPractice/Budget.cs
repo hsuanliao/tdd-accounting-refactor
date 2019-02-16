@@ -4,39 +4,39 @@ namespace Tdd.AccountingPractice
 {
     public class Budget
     {
+        public int Amount { get; set; }
         public string YearMonth { get; set; }
 
-        public int Amount { get; set; }
+        public int EffectiveAmount(Period period)
+        {
+            return DailyAmount() * period.EffectiveDays(CreatePeriod());
+        }
 
-        public int Days()
+        private Period CreatePeriod()
+        {
+            return new Period(FirstDay(), LastDay());
+        }
+
+        private int DailyAmount()
+        {
+            return Amount / Days();
+        }
+
+        private int Days()
         {
             var firstDay = FirstDay();
             return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
         }
 
-        public DateTime FirstDay()
+        private DateTime FirstDay()
         {
             return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
 
-        public int DailyAmount()
+        private DateTime LastDay()
         {
-            return Amount / Days();
-        }
-
-        public DateTime LastDay()
-        {
-            return new DateTime(FirstDay().Year, FirstDay().Month, DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month));
-        }
-
-        public Period CreatePeriod()
-        {
-            return new Period(FirstDay(), LastDay());
-        }
-
-        public int EffectiveAmount(Period period)
-        {
-            return DailyAmount() * period.EffectiveDays(CreatePeriod());
+            return new DateTime(FirstDay().Year, FirstDay().Month,
+                DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month));
         }
     }
 }
