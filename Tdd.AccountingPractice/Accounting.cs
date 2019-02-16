@@ -48,11 +48,11 @@ namespace Tdd.AccountingPractice
 
             foreach (var targetDateTime in filterYearMonths)
             {
-                var targetMonthBudget = GetTargetMonthBudget(budgets, targetDateTime);
-                if (targetMonthBudget != null)
+                var budget = GetTargetBudget(budgets, targetDateTime);
+                if (budget != null)
                 {
                     var monthOfDays = GetDayInTargetMonth(targetDateTime);
-                    var unitOfDay = targetMonthBudget.Amount / monthOfDays;
+                    var unitOfDay = budget.Amount / monthOfDays;
                     var targetAmount = 0;
                     targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, targetAmount, unitOfDay,
                         monthOfDays);
@@ -72,7 +72,7 @@ namespace Tdd.AccountingPractice
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
                     var searchMonth = start.AddMonths(i);
-                    var targetMonthBudget = GetTargetMonthBudget(budgets, searchMonth);
+                    var targetMonthBudget = GetTargetBudget(budgets, searchMonth);
                     if (targetMonthBudget != null)
                     {
                         totalAmount += targetMonthBudget.Amount;
@@ -83,7 +83,7 @@ namespace Tdd.AccountingPractice
             return totalAmount;
         }
 
-        private Budget GetTargetMonthBudget(IEnumerable<Budget> budgetList, DateTime targetDateTime)
+        private Budget GetTargetBudget(IEnumerable<Budget> budgetList, DateTime targetDateTime)
         {
             return budgetList.FirstOrDefault(x => x.YearMonth == targetDateTime.ToString("yyyyMM"));
         }
