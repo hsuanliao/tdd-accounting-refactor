@@ -40,7 +40,11 @@ namespace Tdd.AccountingPractice
                 totalAmount += budgetOfStart.DailyAmount() * EffectiveDays(period.Start, budgetOfStart.LastDay());
             }
 
-            totalAmount += LastMonthAmount(budgets, period);
+            var budgetOfEnd = GetBudget(period.End, budgets);
+            if (budgetOfEnd != null)
+            {
+                totalAmount += budgetOfEnd.DailyAmount() * EffectiveDays(budgetOfEnd.FirstDay(), period.End);
+            }
 
             var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
             if (monthsInTargetRange > 1)
