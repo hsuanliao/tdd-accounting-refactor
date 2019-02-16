@@ -14,7 +14,7 @@ namespace Tdd.AccountingPractice
             return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
         }
 
-        private DateTime FirstDay()
+        public DateTime FirstDay()
         {
             return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
