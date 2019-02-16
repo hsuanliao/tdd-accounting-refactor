@@ -15,8 +15,7 @@ namespace Tdd.AccountingPractice
 
         public int EffectiveDays(Period another)
         {
-            if (!IsValid()) return 0;
-            if (HasNoOverlap(another))
+            if (!IsValid() || HasNoOverlap(another))
             {
                 return 0;
             }
