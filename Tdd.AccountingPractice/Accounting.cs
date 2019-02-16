@@ -17,6 +17,7 @@ namespace Tdd.AccountingPractice
         {
             var budgets = budgetRepo.GetAll();
 
+            var period = new Period(start, end);
             if (!IsValid(start, end)) return 0;
 
             if (IsSameMonth(start, end))
@@ -28,7 +29,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var effectiveDays = new Period(start, end).EffectiveDays();
+                var effectiveDays = period.EffectiveDays();
 
                 return CalculateAmount(budget.DailyAmount(), effectiveDays);
             }
