@@ -43,14 +43,14 @@ namespace Tdd.AccountingPractice
             return totalAmount;
         }
 
-        private int GetFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
+        private int GetFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
         {
             var totalAmount = 0;
             var filterYearMonths = new List<DateTime>() { start, end };
 
             foreach (var targetDateTime in filterYearMonths)
             {
-                var targetMonthBudget = GetTargetMonthBudget(budgetList, targetDateTime);
+                var targetMonthBudget = GetTargetMonthBudget(budgets, targetDateTime);
                 if (targetMonthBudget != null)
                 {
                     var monthOfDays = GetDayInTargetMonth(targetDateTime);
@@ -65,7 +65,7 @@ namespace Tdd.AccountingPractice
             return totalAmount;
         }
 
-        private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
+        private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
         {
             var monthsInTargetRange = GetMonthsInTargetRange(start, end);
             var totalAmount = 0;
@@ -74,7 +74,7 @@ namespace Tdd.AccountingPractice
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
                     var searchMonth = start.AddMonths(i);
-                    var targetMonthBudget = GetTargetMonthBudget(budgetList, searchMonth);
+                    var targetMonthBudget = GetTargetMonthBudget(budgets, searchMonth);
                     if (targetMonthBudget != null)
                     {
                         totalAmount += targetMonthBudget.Amount;
