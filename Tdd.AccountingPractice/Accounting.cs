@@ -43,10 +43,8 @@ namespace Tdd.AccountingPractice
 
         private int GetFirstAndLastTotalAmounts(IEnumerable<Budget> budgets, Period period)
         {
-            DateTime start = period.Start;
-            DateTime end = period.End;
             var totalAmount = 0;
-            var filterYearMonths = new List<DateTime>() { start, end };
+            var filterYearMonths = new List<DateTime>() { period.Start, period.End };
 
             foreach (var targetDateTime in filterYearMonths)
             {
@@ -56,7 +54,7 @@ namespace Tdd.AccountingPractice
                     var monthOfDays = GetDayInTargetMonth(targetDateTime);
                     var unitOfDay = targetMonthBudget.Amount / monthOfDays;
                     var targetAmount = 0;
-                    targetAmount = GetTargetAmount(start, end, targetDateTime, targetAmount, unitOfDay,
+                    targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, targetAmount, unitOfDay,
                         monthOfDays);
                     totalAmount += targetAmount;
                 }
