@@ -89,10 +89,12 @@ namespace Tdd.AccountingPractice
                 {
                     var searchMonth = period.Start.AddMonths(i);
                     var targetMonthBudget = GetBudget(searchMonth, budgets);
+                    int amount = 0;
                     if (targetMonthBudget != null)
                     {
-                        totalAmount += targetMonthBudget.Amount;
+                        amount = targetMonthBudget.Amount;
                     }
+                    totalAmount += amount;
                 }
             }
 
