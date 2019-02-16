@@ -51,11 +51,11 @@ namespace Tdd.AccountingPractice
             {
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
-                    var searchMonth = period.Start.AddMonths(i);
-                    var targetMonthBudget = GetBudget(searchMonth, budgets);
-                    if (targetMonthBudget != null)
+                    var currentMonth = period.Start.AddMonths(i);
+                    var budget = GetBudget(currentMonth, budgets);
+                    if (budget != null)
                     {
-                        totalAmount += targetMonthBudget.DailyAmount() * EffectiveDays(targetMonthBudget.FirstDay(), targetMonthBudget.LastDay());
+                        totalAmount += budget.DailyAmount() * EffectiveDays(budget.FirstDay(), budget.LastDay());
                     }
                 }
             }
