@@ -15,14 +15,14 @@ namespace Tdd.AccountingPractice
         public double TotalAmount(DateTime start, DateTime end)
         {
             var period = new Period(start, end);
-            if (!IsValid(period.Start, period.End)) return 0;
+            if (!IsValid(period)) return 0;
 
             return budgetRepo.GetAll().Sum(b => b.EffectiveAmount(period));
         }
 
-        private bool IsValid(DateTime start, DateTime end)
+        private bool IsValid(Period period)
         {
-            return start <= end;
+            return period.Start <= period.End;
         }
     }
 }
