@@ -34,7 +34,9 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            totalAmount += GetFirstAndLastTotalAmounts(budgets, period);
+            totalAmount += FirstMonthAmount(budgets, period);
+
+            totalAmount += LastMonthAmount(budgets, period);
 
             var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
             if (monthsInTargetRange > 1)
