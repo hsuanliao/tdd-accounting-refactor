@@ -4,6 +4,18 @@ using System.Linq;
 
 namespace Tdd.AccountingPractice
 {
+    public class Period
+    {
+        public Period(DateTime start, DateTime end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public DateTime Start { get; private set; }
+        public DateTime End { get; private set; }
+    }
+
     public class Accounting
     {
         private IBudgetRepo budgetRepo;
@@ -28,7 +40,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var effectiveDays = EffectiveDays(start, end);
+                var effectiveDays = EffectiveDays(new Period(start, end));
 
                 return CalculateAmount(budget.DailyAmount(), effectiveDays);
             }
@@ -130,9 +142,9 @@ namespace Tdd.AccountingPractice
             return budgets.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
         }
 
-        private int EffectiveDays(DateTime start, DateTime end)
+        private int EffectiveDays(Period period)
         {
-            return (end - start).Days + 1;
+            return (period.End - period.Start).Days + 1;
         }
 
         private int GetDayInTargetMonth(DateTime targetDateTime)
