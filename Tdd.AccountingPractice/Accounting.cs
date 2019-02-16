@@ -51,8 +51,7 @@ namespace Tdd.AccountingPractice
                 var budget = GetTargetBudget(budgets, targetDateTime);
                 if (budget != null)
                 {
-                    var targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, 0, budget.DailyAmount(),
-                        budget.Days());
+                    var targetAmount = GetTargetAmount(period.Start, period.End, targetDateTime, budget.DailyAmount(), budget.Days());
                     totalAmount += targetAmount;
                 }
             }
@@ -91,9 +90,9 @@ namespace Tdd.AccountingPractice
             return diffMonths;
         }
 
-        private int GetTargetAmount(DateTime start, DateTime end, DateTime targetDateTime, int targetAmount,
-            int unitOfDay, int monthOfDays)
+        private int GetTargetAmount(DateTime start, DateTime end, DateTime targetDateTime, int unitOfDay, int monthOfDays)
         {
+            int targetAmount = 0;
             if (targetDateTime == start)
             {
                 targetAmount = unitOfDay * (monthOfDays - targetDateTime.Day + 1);
