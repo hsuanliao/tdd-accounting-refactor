@@ -48,7 +48,8 @@ namespace Tdd.AccountingPractice
             var budgetOfStart = GetTargetBudget(budgets, period.Start);
             if (budgetOfStart != null)
             {
-                totalAmount += GetTargetAmount(period.Start, period, budgetOfStart);
+                var firstAmount = GetTargetAmount(period.Start, period, budgetOfStart);
+                totalAmount += firstAmount;
             }
 
             var budgetOfEnd = GetTargetBudget(budgets, period.End);
