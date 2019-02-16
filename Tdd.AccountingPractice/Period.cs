@@ -15,6 +15,11 @@ namespace Tdd.AccountingPractice
 
         public int EffectiveDays(Period another)
         {
+            if (End < another.Start)
+            {
+                return 0;
+            }
+
             DateTime effectiveStart = another.Start > Start
                 ? another.Start
                 : Start;
