@@ -66,7 +66,8 @@ namespace Tdd.AccountingPractice
 
         private int FirstMonthAmount(IEnumerable<Budget> budgets, Period period)
         {
-            var budgetOfStart = GetTargetBudget(budgets, period.Start);
+            var budgetOfStart = GetBudget(period.Start, budgets);
+            //var budgetOfStart = GetTargetBudget(budgets, period.Start);
             int firstAmount = 0;
             if (budgetOfStart != null)
             {
