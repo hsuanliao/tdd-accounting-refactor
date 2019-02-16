@@ -51,8 +51,7 @@ namespace Tdd.AccountingPractice
                 var budget = GetTargetBudget(budgets, targetDateTime);
                 if (budget != null)
                 {
-                    var targetAmount = GetTargetAmount(targetDateTime, period, budget);
-                    totalAmount += targetAmount;
+                    totalAmount += GetTargetAmount(targetDateTime, period, budget);
                 }
             }
 
