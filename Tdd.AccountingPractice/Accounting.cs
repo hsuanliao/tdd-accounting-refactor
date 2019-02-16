@@ -76,10 +76,6 @@ namespace Tdd.AccountingPractice
                 {
                     targetAmount = unitOfDay * (budgetOfStart.Days() - period.Start.Day + 1);
                 }
-                else if (period.Start == period.End)
-                {
-                    targetAmount = unitOfDay * period.Start.Day;
-                }
 
                 firstAmount = targetAmount;
             }
