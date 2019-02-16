@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Tdd.AccountingPractice
 {
@@ -18,14 +19,15 @@ namespace Tdd.AccountingPractice
             var period = new Period(start, end);
             if (!IsValid(start, end)) return 0;
 
-            var totalAmount = 0;
+            return budgets.Sum(b => b.EffectiveAmount(period));
+            //var totalAmount = 0;
 
-            foreach (var budget in budgets)
-            {
-                totalAmount += budget.EffectiveAmount(period);
-            }
+            //foreach (var budget in budgets)
+            //{
+            //    totalAmount += budget.EffectiveAmount(period);
+            //}
 
-            return totalAmount;
+            //return totalAmount;
         }
 
         private bool IsValid(DateTime start, DateTime end)
