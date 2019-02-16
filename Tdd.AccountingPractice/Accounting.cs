@@ -28,10 +28,9 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var dailyAmount = budget.DailyAmount();
                 var effectiveDays = EffectiveDays(start, end);
 
-                return CalculateAmount(dailyAmount, effectiveDays);
+                return CalculateAmount(budget.DailyAmount(), effectiveDays);
             }
 
             var totalAmount = 0;
