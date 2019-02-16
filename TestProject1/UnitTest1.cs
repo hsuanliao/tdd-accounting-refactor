@@ -97,6 +97,13 @@ namespace Tests
             AmountShouldBe(400, new DateTime(2019, 01, 25), new DateTime(2019, 03, 05));
         }
 
+        [Test]
+        public void no_overlap_before_budget()
+        {
+            GivenBudgets(new Budget() { Amount = 280, YearMonth = "201902" });
+            AmountShouldBe(0, new DateTime(2019, 01, 25), new DateTime(2019, 01, 26));
+        }
+
         private void AmountShouldBe(double expected, DateTime start, DateTime end)
         {
             Assert.AreEqual(expected, _accounting.TotalAmount(start, end));
