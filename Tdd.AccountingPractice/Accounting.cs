@@ -36,7 +36,7 @@ namespace Tdd.AccountingPractice
 
             totalAmount += GetFirstAndLastTotalAmounts(budgets, period);
 
-            totalAmount += GetMiddleTotalAmounts(period.Start, period.End, budgets);
+            totalAmount += GetMiddleTotalAmounts(budgets, period);
 
             return totalAmount;
         }
@@ -79,9 +79,10 @@ namespace Tdd.AccountingPractice
             return (effectiveEnd - effectiveStart).Days + 1;
         }
 
-        private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
+        private int GetMiddleTotalAmounts(IEnumerable<Budget> budgets, Period period)
         {
-            var monthsInTargetRange = GetMonthsInTargetRange(start, end);
+            DateTime start = period.Start;
+            var monthsInTargetRange = GetMonthsInTargetRange(start, period.End);
             var totalAmount = 0;
             if (monthsInTargetRange > 1)
             {
