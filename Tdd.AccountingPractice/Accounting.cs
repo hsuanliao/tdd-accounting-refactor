@@ -54,7 +54,7 @@ namespace Tdd.AccountingPractice
 
         private int LastMonthAmount(IEnumerable<Budget> budgets, Period period)
         {
-            var budgetOfEnd = GetTargetBudget(budgets, period.End);
+            var budgetOfEnd = GetBudget(period.End, budgets);
             int lastAmount = 0;
             if (budgetOfEnd != null)
             {
