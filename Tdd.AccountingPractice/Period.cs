@@ -35,5 +35,10 @@ namespace Tdd.AccountingPractice
         {
             return Start > another.End || End < another.Start;
         }
+
+        public bool IsValid()
+        {
+            return Start <= End;
+        }
     }
 }
