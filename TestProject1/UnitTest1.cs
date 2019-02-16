@@ -89,9 +89,9 @@ namespace Tests
         public void query_cross_3_months()
         {
             GivenBudgets(
-                    new Budget() { Amount = 310, YearMonth = "201901" },
-                    new Budget() { Amount = 280, YearMonth = "201902" },
-                    new Budget() { Amount = 310, YearMonth = "201903" }
+                new Budget() { Amount = 310, YearMonth = "201901" },
+                new Budget() { Amount = 280, YearMonth = "201902" },
+                new Budget() { Amount = 310, YearMonth = "201903" }
             );
 
             AmountShouldBe(400, new DateTime(2019, 01, 25), new DateTime(2019, 03, 05));
