@@ -51,8 +51,7 @@ namespace Tdd.AccountingPractice
             {
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
-                    var currentMonth = period.Start.AddMonths(i);
-                    var budget = GetBudget(currentMonth, budgets);
+                    var budget = GetBudget(period.Start.AddMonths(i), budgets);
                     if (budget != null)
                     {
                         totalAmount += budget.DailyAmount() * EffectiveDays(budget.FirstDay(), budget.LastDay());
