@@ -28,7 +28,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var dailyAmount = budget.Amount / GetDayInTargetMonth(start);
+                var dailyAmount = budget.Amount / DateTime.DaysInMonth(start.Year, start.Month);
                 var effectiveDays = EffectiveDays(start, end);
 
                 return CalculateAmount(dailyAmount, effectiveDays);
