@@ -70,12 +70,8 @@ namespace Tdd.AccountingPractice
             int firstAmount = 0;
             if (budgetOfStart != null)
             {
-                int unitOfDay = budgetOfStart.DailyAmount();
                 int targetAmount = 0;
-                if (true)
-                {
-                    targetAmount = unitOfDay * (budgetOfStart.Days() - period.Start.Day + 1);
-                }
+                targetAmount = budgetOfStart.DailyAmount() * (budgetOfStart.Days() - period.Start.Day + 1);
 
                 firstAmount = targetAmount;
             }
