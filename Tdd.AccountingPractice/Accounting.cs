@@ -142,7 +142,7 @@ namespace Tdd.AccountingPractice
             return budgets.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
         }
 
-        private int EffectiveDays(Period period)
+        private static int EffectiveDays(Period period)
         {
             return (period.End - period.Start).Days + 1;
         }
