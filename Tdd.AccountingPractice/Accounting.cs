@@ -39,10 +39,6 @@ namespace Tdd.AccountingPractice
             {
                 totalAmount += budgetOfStart.DailyAmount() * EffectiveDays(period.Start, budgetOfStart.LastDay());
             }
-            else
-            {
-                totalAmount += 0;
-            }
 
             totalAmount += LastMonthAmount(budgets, period);
 
