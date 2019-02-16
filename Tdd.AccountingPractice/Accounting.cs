@@ -20,19 +20,19 @@ namespace Tdd.AccountingPractice
             var period = new Period(start, end);
             if (!IsValid(start, end)) return 0;
 
-            if (IsSameMonth(start, end))
-            {
-                var budget = GetBudget(start, budgets);
+            //if (IsSameMonth(start, end))
+            //{
+            //    var budget = GetBudget(start, budgets);
 
-                if (budget == null)
-                {
-                    return 0;
-                }
+            //    if (budget == null)
+            //    {
+            //        return 0;
+            //    }
 
-                var effectiveStart = period.Start;
-                var effectiveEnd = period.End;
-                return budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
-            }
+            //    var effectiveStart = period.Start;
+            //    var effectiveEnd = period.End;
+            //    return budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
+            //}
 
             var totalAmount = 0;
 
@@ -45,22 +45,6 @@ namespace Tdd.AccountingPractice
                 DateTime effectiveEnd = budget.LastDay() < period.End
                     ? budget.LastDay()
                     : period.End;
-
-                if (IsSameMonth(budget.FirstDay(), period.Start))
-                {
-                    //effectiveStart = period.Start;
-                    //effectiveEnd = budget.LastDay();
-                }
-                else if (IsSameMonth(budget.FirstDay(), period.End))
-                {
-                    //effectiveStart = budget.FirstDay();
-                    //effectiveEnd = period.End;
-                }
-                else
-                {
-                    //effectiveStart = budget.FirstDay();
-                    //effectiveEnd = budget.LastDay();
-                }
 
                 totalAmount += budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
             }
