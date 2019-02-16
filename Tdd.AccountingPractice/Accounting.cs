@@ -42,22 +42,24 @@ namespace Tdd.AccountingPractice
                     ? budget.FirstDay()
                     : period.Start;
 
-                DateTime effectiveEnd;
+                DateTime effectiveEnd = budget.LastDay() < period.End
+                    ? budget.LastDay()
+                    : period.End;
 
                 if (IsSameMonth(budget.FirstDay(), period.Start))
                 {
                     //effectiveStart = period.Start;
-                    effectiveEnd = budget.LastDay();
+                    //effectiveEnd = budget.LastDay();
                 }
                 else if (IsSameMonth(budget.FirstDay(), period.End))
                 {
                     //effectiveStart = budget.FirstDay();
-                    effectiveEnd = period.End;
+                    //effectiveEnd = period.End;
                 }
                 else
                 {
                     //effectiveStart = budget.FirstDay();
-                    effectiveEnd = budget.LastDay();
+                    //effectiveEnd = budget.LastDay();
                 }
 
                 totalAmount += budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
