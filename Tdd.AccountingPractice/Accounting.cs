@@ -36,7 +36,19 @@ namespace Tdd.AccountingPractice
 
             totalAmount += GetFirstAndLastTotalAmounts(budgets, period);
 
-            totalAmount += GetMiddleTotalAmounts(budgets, period);
+            var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
+            var middleAmounts = 0;
+            if (monthsInTargetRange > 1)
+            {
+                for (int i = 1; i < monthsInTargetRange; i++)
+                {
+                    var searchMonth = period.Start.AddMonths(i);
+                    var amount = MiddleAmount(budgets, searchMonth);
+                    middleAmounts += amount;
+                }
+            }
+
+            totalAmount += middleAmounts;
 
             return totalAmount;
         }
@@ -101,7 +113,6 @@ namespace Tdd.AccountingPractice
             var targetMonthBudget = GetBudget(searchMonth, budgets);
             if (targetMonthBudget != null)
             {
-                //return targetMonthBudget.Amount;
                 return targetMonthBudget.DailyAmount() * EffectiveDays(targetMonthBudget.FirstDay(), targetMonthBudget.LastDay());
             }
 
