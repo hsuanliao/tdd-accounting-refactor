@@ -47,10 +47,6 @@ namespace Tdd.AccountingPractice
                     {
                         totalAmount += targetMonthBudget.DailyAmount() * EffectiveDays(targetMonthBudget.FirstDay(), targetMonthBudget.LastDay());
                     }
-                    else
-                    {
-                        totalAmount += 0;
-                    }
                 }
             }
 
