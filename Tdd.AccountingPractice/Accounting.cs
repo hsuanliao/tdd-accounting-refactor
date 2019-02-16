@@ -101,7 +101,8 @@ namespace Tdd.AccountingPractice
             var targetMonthBudget = GetBudget(searchMonth, budgets);
             if (targetMonthBudget != null)
             {
-                return targetMonthBudget.Amount;
+                //return targetMonthBudget.Amount;
+                return targetMonthBudget.DailyAmount() * EffectiveDays(targetMonthBudget.FirstDay(), targetMonthBudget.LastDay());
             }
 
             return 0;
