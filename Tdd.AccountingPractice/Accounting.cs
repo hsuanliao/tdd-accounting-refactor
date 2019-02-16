@@ -45,12 +45,7 @@ namespace Tdd.AccountingPractice
         {
             var totalAmount = 0;
 
-            var budgetOfStart = GetTargetBudget(budgets, period.Start);
-            int firstAmount = 0;
-            if (budgetOfStart != null)
-            {
-                firstAmount = GetTargetAmount(period.Start, period, budgetOfStart);
-            }
+            var firstAmount = FirstMonthAmount(budgets, period);
             totalAmount += firstAmount;
 
             var budgetOfEnd = GetTargetBudget(budgets, period.End);
@@ -60,6 +55,18 @@ namespace Tdd.AccountingPractice
             }
 
             return totalAmount;
+        }
+
+        private int FirstMonthAmount(IEnumerable<Budget> budgets, Period period)
+        {
+            var budgetOfStart = GetTargetBudget(budgets, period.Start);
+            int firstAmount = 0;
+            if (budgetOfStart != null)
+            {
+                firstAmount = GetTargetAmount(period.Start, period, budgetOfStart);
+            }
+
+            return firstAmount;
         }
 
         private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
