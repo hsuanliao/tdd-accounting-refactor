@@ -81,15 +81,14 @@ namespace Tdd.AccountingPractice
 
         private int GetMiddleTotalAmounts(IEnumerable<Budget> budgets, Period period)
         {
-            DateTime start = period.Start;
-            var monthsInTargetRange = GetMonthsInTargetRange(start, period.End);
+            var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
             var totalAmount = 0;
             if (monthsInTargetRange > 1)
             {
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
-                    var searchMonth = start.AddMonths(i);
-                    var targetMonthBudget = GetTargetBudget(budgets, searchMonth);
+                    var searchMonth = period.Start.AddMonths(i);
+                    var targetMonthBudget = GetBudget(searchMonth, budgets);
                     if (targetMonthBudget != null)
                     {
                         totalAmount += targetMonthBudget.Amount;
