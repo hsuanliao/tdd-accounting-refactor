@@ -57,7 +57,18 @@ namespace Tdd.AccountingPractice
             var budgetOfEnd = GetBudget(period.End, budgets);
             if (budgetOfEnd != null)
             {
-                return GetTargetAmount(period.End, period, budgetOfEnd);
+                int unitOfDay = budgetOfEnd.DailyAmount();
+                int targetAmount = 0;
+                if (period.End == period.Start)
+                {
+                    targetAmount = unitOfDay * (budgetOfEnd.Days() - period.End.Day + 1);
+                }
+                else if (period.End == period.End)
+                {
+                    targetAmount = unitOfDay * period.End.Day;
+                }
+
+                return targetAmount;
             }
 
             return 0;
