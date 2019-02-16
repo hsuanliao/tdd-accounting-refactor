@@ -36,22 +36,6 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            //var budgetOfStart = GetBudget(period.Start, budgets);
-            //if (budgetOfStart != null)
-            //{
-            //    var effectiveStart = period.Start;
-            //    var effectiveEnd = budgetOfStart.LastDay();
-            //    totalAmount += budgetOfStart.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
-            //}
-
-            //var budgetOfEnd = GetBudget(period.End, budgets);
-            //if (budgetOfEnd != null)
-            //{
-            //    var effectiveStart = budgetOfEnd.FirstDay();
-            //    var effectiveEnd = period.End;
-            //    totalAmount += budgetOfEnd.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
-            //}
-
             var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
             for (int i = 0; i < monthsInTargetRange + 1; i++)
             {
