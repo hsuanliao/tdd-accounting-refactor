@@ -21,17 +21,13 @@ namespace Tdd.AccountingPractice
         public int EffectiveDays(Budget budget)
         {
             var another = new Period(budget.FirstDay(), budget.LastDay());
-            //var firstDay = budget.FirstDay();
-            //var lastDay = budget.LastDay();
-            var firstDay = another.Start;
-            var lastDay = another.End;
 
-            DateTime effectiveStart = firstDay > Start
-                ? firstDay
+            DateTime effectiveStart = another.Start > Start
+                ? another.Start
                 : Start;
 
-            DateTime effectiveEnd = lastDay < End
-                ? lastDay
+            DateTime effectiveEnd = another.End < End
+                ? another.End
                 : End;
 
             return (effectiveEnd - effectiveStart).Days + 1;
