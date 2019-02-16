@@ -45,11 +45,9 @@ namespace Tdd.AccountingPractice
         {
             var totalAmount = 0;
 
-            var firstAmount = FirstMonthAmount(budgets, period);
-            totalAmount += firstAmount;
+            totalAmount += FirstMonthAmount(budgets, period);
 
-            var lastAmount = LastMonthAmount(budgets, period);
-            totalAmount += lastAmount;
+            totalAmount += LastMonthAmount(budgets, period);
 
             return totalAmount;
         }
