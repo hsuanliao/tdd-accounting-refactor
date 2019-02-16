@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Tdd.AccountingPractice;
 
@@ -7,7 +8,7 @@ namespace Tests
     [TestFixture]
     public class Tests
     {
-        private Accounting _accounting = new Accounting();
+        private Accounting _accounting = new Accounting(new BudgetRepo());
 
         [SetUp]
         public void Setup()
@@ -35,10 +36,41 @@ namespace Tests
             
             AmountShouldBe(0, totalAmount);
         }
+        
+        [Test]
+        public void QueryOneDateBudget()
+        {
+            var starDate = new DateTime(2019, 01, 01);
+            var endDate = new DateTime(2019, 01, 01);
+            
+            var totalAmount = _accounting.TotalAmount(starDate, endDate);
+            
+            AmountShouldBe(10, totalAmount);
+        }
+        
+        [Test]
+        public void QueryOneMonthBudget()
+        {
+            var starDate = new DateTime(2019, 01, 01);
+            var endDate = new DateTime(2019, 01, 31);
+            
+            var totalAmount = _accounting.TotalAmount(starDate, endDate);
+            
+            AmountShouldBe(310, totalAmount);
+        }
 
         private static void AmountShouldBe(double expected, double totalAmount)
         {
             Assert.AreEqual(expected, totalAmount);
+        }
+    }
+    
+    public class BudgetRepo : IBudgetRepo
+    {
+        public IEnumerable<Budget> GetAll()
+        {
+            var result = new List<Budget> {new Budget() {Amount = 310, YearMonth = "201901"}};
+            return result;
         }
     }
 }
