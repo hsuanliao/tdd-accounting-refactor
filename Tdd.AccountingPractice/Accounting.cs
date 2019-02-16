@@ -30,7 +30,8 @@ namespace Tdd.AccountingPractice
                     ? budget.LastDay()
                     : period.End;
 
-                totalAmount += budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
+                var effectiveDays = EffectiveDays(effectiveStart, effectiveEnd);
+                totalAmount += budget.DailyAmount() * effectiveDays;
             }
 
             return totalAmount;
