@@ -18,10 +18,8 @@ namespace Tdd.AccountingPractice
             return (End - Start).Days + 1;
         }
 
-        public int EffectiveDays(Budget budget)
+        public int EffectiveDays(Period another)
         {
-            var another = new Period(budget.FirstDay(), budget.LastDay());
-
             DateTime effectiveStart = another.Start > Start
                 ? another.Start
                 : Start;

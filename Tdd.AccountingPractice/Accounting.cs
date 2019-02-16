@@ -22,7 +22,7 @@ namespace Tdd.AccountingPractice
 
             foreach (var budget in budgets)
             {
-                var effectiveDays = period.EffectiveDays(budget);
+                var effectiveDays = period.EffectiveDays(new Period(budget.FirstDay(), budget.LastDay()));
                 totalAmount += budget.DailyAmount() * effectiveDays;
             }
 
