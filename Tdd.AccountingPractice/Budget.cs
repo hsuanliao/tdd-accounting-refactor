@@ -28,5 +28,10 @@ namespace Tdd.AccountingPractice
         {
             return new DateTime(FirstDay().Year, FirstDay().Month, DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month));
         }
+
+        public Period CreatePeriod()
+        {
+            return new Period(FirstDay(), LastDay());
+        }
     }
 }
