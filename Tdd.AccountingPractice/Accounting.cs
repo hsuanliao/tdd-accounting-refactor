@@ -28,8 +28,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                //var dailyAmount = budget.Amount / DateTime.DaysInMonth(start.Year, start.Month);
-                var dailyAmount = budget.Amount / budget.Days();
+                var dailyAmount = DailyAmount(budget);
                 var effectiveDays = EffectiveDays(start, end);
 
                 return CalculateAmount(dailyAmount, effectiveDays);
@@ -42,6 +41,12 @@ namespace Tdd.AccountingPractice
             totalAmount += GetMiddleTotalAmounts(start, end, budgets);
 
             return totalAmount;
+        }
+
+        private static int DailyAmount(Budget budget)
+        {
+            var dailyAmount = budget.Amount / budget.Days();
+            return dailyAmount;
         }
 
         private int GetFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
