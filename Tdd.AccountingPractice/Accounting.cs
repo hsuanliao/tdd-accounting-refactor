@@ -42,7 +42,15 @@ namespace Tdd.AccountingPractice
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
                     var searchMonth = period.Start.AddMonths(i);
-                    totalAmount += MiddleAmount(budgets, searchMonth);
+                    var targetMonthBudget = GetBudget(searchMonth, budgets);
+                    if (targetMonthBudget != null)
+                    {
+                        totalAmount += targetMonthBudget.DailyAmount() * EffectiveDays(targetMonthBudget.FirstDay(), targetMonthBudget.LastDay());
+                    }
+                    else
+                    {
+                        totalAmount += 0;
+                    }
                 }
             }
 
