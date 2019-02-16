@@ -38,21 +38,25 @@ namespace Tdd.AccountingPractice
 
             foreach (var budget in budgets)
             {
-                DateTime effectiveStart;
+                DateTime effectiveStart = budget.FirstDay() > period.Start
+                    ? budget.FirstDay()
+                    : period.Start;
+
                 DateTime effectiveEnd;
+
                 if (IsSameMonth(budget.FirstDay(), period.Start))
                 {
-                    effectiveStart = period.Start;
+                    //effectiveStart = period.Start;
                     effectiveEnd = budget.LastDay();
                 }
                 else if (IsSameMonth(budget.FirstDay(), period.End))
                 {
-                    effectiveStart = budget.FirstDay();
+                    //effectiveStart = budget.FirstDay();
                     effectiveEnd = period.End;
                 }
                 else
                 {
-                    effectiveStart = budget.FirstDay();
+                    //effectiveStart = budget.FirstDay();
                     effectiveEnd = budget.LastDay();
                 }
 
