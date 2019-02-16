@@ -67,14 +67,12 @@ namespace Tdd.AccountingPractice
         private int FirstMonthAmount(IEnumerable<Budget> budgets, Period period)
         {
             var budgetOfStart = GetBudget(period.Start, budgets);
-            //var budgetOfStart = GetTargetBudget(budgets, period.Start);
-            int firstAmount = 0;
             if (budgetOfStart != null)
             {
-                firstAmount = budgetOfStart.DailyAmount() * (budgetOfStart.Days() - period.Start.Day + 1);
+                return budgetOfStart.DailyAmount() * (budgetOfStart.Days() - period.Start.Day + 1);
             }
 
-            return firstAmount;
+            return 0;
         }
 
         private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
