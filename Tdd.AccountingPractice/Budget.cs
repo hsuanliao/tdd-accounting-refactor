@@ -10,13 +10,23 @@ namespace Tdd.AccountingPractice
 
         public int Days()
         {
-            var firstDay = DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
+            var firstDay = FirstDay();
             return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
+        }
+
+        private DateTime FirstDay()
+        {
+            return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
 
         public int DailyAmount()
         {
             return Amount / Days();
+        }
+
+        public DateTime LastDay()
+        {
+            return new DateTime(FirstDay().Year, FirstDay().Month, DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month));
         }
     }
 }
