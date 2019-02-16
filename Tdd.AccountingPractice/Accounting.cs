@@ -69,14 +69,13 @@ namespace Tdd.AccountingPractice
             var budgetOfStart = GetBudget(period.Start, budgets);
             if (budgetOfStart != null)
             {
-                var effectiveDays = EffectiveDaysOfFirstMonth(budgetOfStart.LastDay(), period.Start);
-                return budgetOfStart.DailyAmount() * effectiveDays;
+                return budgetOfStart.DailyAmount() * EffectiveDays(budgetOfStart.LastDay(), period.Start);
             }
 
             return 0;
         }
 
-        private static int EffectiveDaysOfFirstMonth(DateTime effectiveEnd, DateTime effectiveStart)
+        private static int EffectiveDays(DateTime effectiveEnd, DateTime effectiveStart)
         {
             return (effectiveEnd - effectiveStart).Days + 1;
         }
