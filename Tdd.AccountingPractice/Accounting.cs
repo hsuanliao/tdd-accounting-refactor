@@ -29,7 +29,9 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                return budget.DailyAmount() * EffectiveDays(period.Start, period.End);
+                var effectiveStart = period.Start;
+                var effectiveEnd = period.End;
+                return budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
             }
 
             var totalAmount = 0;
@@ -37,25 +39,28 @@ namespace Tdd.AccountingPractice
             var budgetOfStart = GetBudget(period.Start, budgets);
             if (budgetOfStart != null)
             {
-                totalAmount += budgetOfStart.DailyAmount() * EffectiveDays(period.Start, budgetOfStart.LastDay());
+                var effectiveStart = period.Start;
+                var effectiveEnd = budgetOfStart.LastDay();
+                totalAmount += budgetOfStart.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
             }
 
             var budgetOfEnd = GetBudget(period.End, budgets);
             if (budgetOfEnd != null)
             {
-                totalAmount += budgetOfEnd.DailyAmount() * EffectiveDays(budgetOfEnd.FirstDay(), period.End);
+                var effectiveStart = budgetOfEnd.FirstDay();
+                var effectiveEnd = period.End;
+                totalAmount += budgetOfEnd.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
             }
 
             var monthsInTargetRange = GetMonthsInTargetRange(period.Start, period.End);
-            if (monthsInTargetRange > 1)
+            for (int i = 1; i < monthsInTargetRange; i++)
             {
-                for (int i = 1; i < monthsInTargetRange; i++)
+                var budget = GetBudget(period.Start.AddMonths(i), budgets);
+                if (budget != null)
                 {
-                    var budget = GetBudget(period.Start.AddMonths(i), budgets);
-                    if (budget != null)
-                    {
-                        totalAmount += budget.DailyAmount() * EffectiveDays(budget.FirstDay(), budget.LastDay());
-                    }
+                    var effectiveStart = budget.FirstDay();
+                    var effectiveEnd = budget.LastDay();
+                    totalAmount += budget.DailyAmount() * EffectiveDays(effectiveStart, effectiveEnd);
                 }
             }
 
