@@ -34,9 +34,9 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            totalAmount += GetFirstAndLastTotalAmounts(start, end, budgets);
+            totalAmount += GetFirstAndLastTotalAmounts(period.Start, period.End, budgets);
 
-            totalAmount += GetMiddleTotalAmounts(start, end, budgets);
+            totalAmount += GetMiddleTotalAmounts(period.Start, period.End, budgets);
 
             return totalAmount;
         }
