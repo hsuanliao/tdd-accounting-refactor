@@ -88,17 +88,23 @@ namespace Tdd.AccountingPractice
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
                     var searchMonth = period.Start.AddMonths(i);
-                    var targetMonthBudget = GetBudget(searchMonth, budgets);
-                    int amount = 0;
-                    if (targetMonthBudget != null)
-                    {
-                        amount = targetMonthBudget.Amount;
-                    }
+                    var amount = MiddleAmount(budgets, searchMonth);
                     totalAmount += amount;
                 }
             }
 
             return totalAmount;
+        }
+
+        private int MiddleAmount(IEnumerable<Budget> budgets, DateTime searchMonth)
+        {
+            var targetMonthBudget = GetBudget(searchMonth, budgets);
+            if (targetMonthBudget != null)
+            {
+                return targetMonthBudget.Amount;
+            }
+
+            return 0;
         }
 
         private Budget GetTargetBudget(IEnumerable<Budget> budgetList, DateTime targetDateTime)
