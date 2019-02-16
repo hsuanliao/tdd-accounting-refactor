@@ -17,34 +17,30 @@ namespace Tdd.AccountingPractice
         {
             var budgetList = budgetRepo.GetAll();
 
-            if (IsValidateDateRange(start, end))
+            if (!IsValidateDateRange(start, end)) return 0;
+            if (IsSameMonth(start, end))
             {
-                if (IsSameMonth(start, end))
+                var targetBudgets = GetBudget(start, budgetList);
+
+                if (targetBudgets == null)
                 {
-                    var targetBudgets = GetBudget(start, budgetList);
-
-                    if (targetBudgets == null)
-                    {
-                        return 0;
-                    }
-
-                    var unitOfDay = targetBudgets.Amount / GetDayInTargetMonth(start);
-                    var daysOfTargetMonth = GetDifferentDays(start, end);
-
-                    return CalculateAmount(unitOfDay, daysOfTargetMonth);
+                    return 0;
                 }
 
-                var totalAmount = 0;
+                var unitOfDay = targetBudgets.Amount / GetDayInTargetMonth(start);
+                var daysOfTargetMonth = GetDifferentDays(start, end);
 
-                totalAmount += GeFirstAndLastTotalAmounts(start, end, budgetList);
-
-                totalAmount += GetMiddleTotalAmounts(start, end, budgetList);
-
-                return totalAmount;
-
+                return CalculateAmount(unitOfDay, daysOfTargetMonth);
             }
 
-            return 0;
+            var totalAmount = 0;
+
+            totalAmount += GeFirstAndLastTotalAmounts(start, end, budgetList);
+
+            totalAmount += GetMiddleTotalAmounts(start, end, budgetList);
+
+            return totalAmount;
+
         }
 
         private int GeFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
