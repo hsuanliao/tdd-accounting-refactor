@@ -34,15 +34,17 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            totalAmount += GetFirstAndLastTotalAmounts(period.Start, period.End, budgets);
+            totalAmount += GetFirstAndLastTotalAmounts(budgets, period);
 
             totalAmount += GetMiddleTotalAmounts(period.Start, period.End, budgets);
 
             return totalAmount;
         }
 
-        private int GetFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgets)
+        private int GetFirstAndLastTotalAmounts(IEnumerable<Budget> budgets, Period period)
         {
+            DateTime start = period.Start;
+            DateTime end = period.End;
             var totalAmount = 0;
             var filterYearMonths = new List<DateTime>() { start, end };
 
