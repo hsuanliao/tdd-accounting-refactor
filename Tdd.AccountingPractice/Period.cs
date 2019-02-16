@@ -15,11 +15,7 @@ namespace Tdd.AccountingPractice
 
         public int EffectiveDays(Period another)
         {
-            if (Start > another.End)
-            {
-                return 0;
-            }
-            if (End < another.Start)
+            if (HasNoOverlap(another))
             {
                 return 0;
             }
@@ -33,6 +29,11 @@ namespace Tdd.AccountingPractice
                 : End;
 
             return (effectiveEnd - effectiveStart).Days + 1;
+        }
+
+        private bool HasNoOverlap(Period another)
+        {
+            return Start > another.End || End < another.Start;
         }
     }
 }
