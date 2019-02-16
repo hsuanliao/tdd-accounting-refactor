@@ -29,7 +29,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                return budget.DailyAmount() * period.Days();
+                return budget.DailyAmount() * EffectiveDays(period.Start, period.End);
             }
 
             var totalAmount = 0;
@@ -57,7 +57,6 @@ namespace Tdd.AccountingPractice
             var budgetOfEnd = GetBudget(period.End, budgets);
             if (budgetOfEnd != null)
             {
-                //return budgetOfEnd.DailyAmount() * period.End.Day;
                 return budgetOfEnd.DailyAmount() * EffectiveDays(budgetOfEnd.FirstDay(), period.End);
             }
 
