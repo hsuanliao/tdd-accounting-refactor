@@ -1,3 +1,5 @@
+using System;
+
 namespace Tdd.AccountingPractice
 {
     public class Budget
@@ -5,5 +7,11 @@ namespace Tdd.AccountingPractice
         public string YearMonth { get; set; }
 
         public int Amount { get; set; }
+
+        public int Days()
+        {
+            var firstDay = DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
+            return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
+        }
     }
 }
