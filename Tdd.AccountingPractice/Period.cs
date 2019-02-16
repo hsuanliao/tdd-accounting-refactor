@@ -13,7 +13,7 @@ namespace Tdd.AccountingPractice
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
 
-        public int Days()
+        public int EffectiveDays()
         {
             return (End - Start).Days + 1;
         }

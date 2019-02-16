@@ -39,12 +39,6 @@ namespace Tdd.AccountingPractice
                 ? budget.LastDay()
                 : period.End;
 
-            var effectiveDays = EffectiveDays(effectiveStart, effectiveEnd);
-            return effectiveDays;
-        }
-
-        private static int EffectiveDays(DateTime effectiveStart, DateTime effectiveEnd)
-        {
             return (effectiveEnd - effectiveStart).Days + 1;
         }
 
