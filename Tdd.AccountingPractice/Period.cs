@@ -36,7 +36,7 @@ namespace Tdd.AccountingPractice
             return Start > another.End || End < another.Start;
         }
 
-        public bool IsValid()
+        private bool IsValid()
         {
             return Start <= End;
         }
