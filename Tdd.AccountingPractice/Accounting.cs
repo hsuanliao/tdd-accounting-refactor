@@ -44,7 +44,6 @@ namespace Tdd.AccountingPractice
         private int GetFirstAndLastTotalAmounts(IEnumerable<Budget> budgets, Period period)
         {
             var totalAmount = 0;
-            //var filterYearMonths = new List<DateTime>() { period.Start, period.End };
 
             var budgetOfStart = GetTargetBudget(budgets, period.Start);
             if (budgetOfStart != null)
@@ -57,15 +56,6 @@ namespace Tdd.AccountingPractice
             {
                 totalAmount += GetTargetAmount(period.End, period, budgetOfEnd);
             }
-
-            //foreach (var targetDateTime in filterYearMonths)
-            //{
-            //    var budget = GetTargetBudget(budgets, targetDateTime);
-            //    if (budget != null)
-            //    {
-            //        totalAmount += GetTargetAmount(targetDateTime, period, budget);
-            //    }
-            //}
 
             return totalAmount;
         }
