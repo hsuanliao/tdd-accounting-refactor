@@ -12,41 +12,41 @@ namespace Tdd.AccountingPractice
         {
             budgetRepo = repo;
         }
-        
+
         public double TotalAmount(DateTime start, DateTime end)
         {
-            var budgetList = budgetRepo.GetAll();
+            var budgets = budgetRepo.GetAll();
 
-            if (!IsValidateDateRange(start, end)) return 0;
+            if (!IsValid(start, end)) return 0;
+
             if (IsSameMonth(start, end))
             {
-                var targetBudgets = GetBudget(start, budgetList);
+                var budget = GetBudget(start, budgets);
 
-                if (targetBudgets == null)
+                if (budget == null)
                 {
                     return 0;
                 }
 
-                var unitOfDay = targetBudgets.Amount / GetDayInTargetMonth(start);
-                var daysOfTargetMonth = GetDifferentDays(start, end);
+                var dailyAmount = budget.Amount / GetDayInTargetMonth(start);
+                var effectiveDays = EffectiveDays(start, end);
 
-                return CalculateAmount(unitOfDay, daysOfTargetMonth);
+                return CalculateAmount(dailyAmount, effectiveDays);
             }
 
             var totalAmount = 0;
 
-            totalAmount += GeFirstAndLastTotalAmounts(start, end, budgetList);
+            totalAmount += GeFirstAndLastTotalAmounts(start, end, budgets);
 
-            totalAmount += GetMiddleTotalAmounts(start, end, budgetList);
+            totalAmount += GetMiddleTotalAmounts(start, end, budgets);
 
             return totalAmount;
-
         }
 
         private int GeFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
         {
             var totalAmount = 0;
-            var filterYearMonths = new List<DateTime>() {start, end};
+            var filterYearMonths = new List<DateTime>() { start, end };
 
             foreach (var targetDateTime in filterYearMonths)
             {
@@ -64,7 +64,6 @@ namespace Tdd.AccountingPractice
 
             return totalAmount;
         }
-        
 
         private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
         {
@@ -95,7 +94,6 @@ namespace Tdd.AccountingPractice
         {
             var diffMonths = 12 * (end.Year - start.Year) + (end.Month - start.Month);
             return diffMonths;
-
         }
 
         private int GetTargetAmount(DateTime start, DateTime end, DateTime targetDateTime, int targetAmount,
@@ -115,33 +113,32 @@ namespace Tdd.AccountingPractice
 
         private bool IsSameMonth(DateTime start, DateTime end)
         {
-            
             return start.ToString("yyyyMM") == end.ToString("yyyyMM");
         }
 
-        private int CalculateAmount(int unitOfDay, int daysOfTargetMonth)
+        private int CalculateAmount(int dailyAmount, int effectiveDays)
         {
-            return unitOfDay*daysOfTargetMonth;
+            return dailyAmount * effectiveDays;
         }
 
-        private bool IsValidateDateRange(DateTime start, DateTime end)
+        private bool IsValid(DateTime start, DateTime end)
         {
             return start <= end;
         }
 
-        private Budget GetBudget(DateTime start, IEnumerable<Budget> budegtList)
+        private Budget GetBudget(DateTime start, IEnumerable<Budget> budgets)
         {
-            return budegtList.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
+            return budgets.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
         }
 
-        private int GetDifferentDays(DateTime start,DateTime end)
+        private int EffectiveDays(DateTime start, DateTime end)
         {
-            return (end-start).Days+1;
+            return (end - start).Days + 1;
         }
 
         private int GetDayInTargetMonth(DateTime targetDateTime)
         {
-            return DateTime.DaysInMonth(targetDateTime.Year,targetDateTime.Month);
+            return DateTime.DaysInMonth(targetDateTime.Year, targetDateTime.Month);
         }
     }
 }
