@@ -22,19 +22,25 @@ namespace Tdd.AccountingPractice
 
             foreach (var budget in budgets)
             {
-                DateTime effectiveStart = budget.FirstDay() > period.Start
-                    ? budget.FirstDay()
-                    : period.Start;
-
-                DateTime effectiveEnd = budget.LastDay() < period.End
-                    ? budget.LastDay()
-                    : period.End;
-
-                var effectiveDays = EffectiveDays(effectiveStart, effectiveEnd);
+                var effectiveDays = EffectiveDays(budget, period);
                 totalAmount += budget.DailyAmount() * effectiveDays;
             }
 
             return totalAmount;
+        }
+
+        private static int EffectiveDays(Budget budget, Period period)
+        {
+            DateTime effectiveStart = budget.FirstDay() > period.Start
+                ? budget.FirstDay()
+                : period.Start;
+
+            DateTime effectiveEnd = budget.LastDay() < period.End
+                ? budget.LastDay()
+                : period.End;
+
+            var effectiveDays = EffectiveDays(effectiveStart, effectiveEnd);
+            return effectiveDays;
         }
 
         private static int EffectiveDays(DateTime effectiveStart, DateTime effectiveEnd)
