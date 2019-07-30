@@ -38,11 +38,6 @@ namespace Tdd.AccountingPractice
             return totalAmount;
         }
 
-        private int CalculateAmount(int unitOfDay, int daysOfTargetMonth)
-        {
-            return unitOfDay * daysOfTargetMonth;
-        }
-
         private int EffectiveDayCount(DateTime start, DateTime end)
         {
             return (end - start).Days + 1;
