@@ -21,16 +21,12 @@ namespace Tdd.AccountingPractice
             if (IsSameMonth(start, end))
             {
                 var budget = GetBudget(start, budgetList);
-
                 if (budget == null)
                 {
                     return 0;
                 }
 
-                var dailyAmount = budget.Amount / budget.DayCount();
-                var effectiveDayCount = EffectiveDayCount(start, end);
-
-                return CalculateAmount(dailyAmount, effectiveDayCount);
+                return budget.Amount / budget.DayCount() * EffectiveDayCount(start, end);
             }
 
             var totalAmount = 0;
