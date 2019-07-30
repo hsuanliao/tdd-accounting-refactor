@@ -12,7 +12,7 @@ namespace Tdd.AccountingPractice
         {
             budgetRepo = repo;
         }
-        
+
         public double TotalAmount(DateTime start, DateTime end)
         {
             var budgetList = budgetRepo.GetAll();
@@ -40,13 +40,17 @@ namespace Tdd.AccountingPractice
             totalAmount += GetMiddleTotalAmounts(start, end, budgetList);
 
             return totalAmount;
+        }
 
+        private int CalculateAmount(int unitOfDay, int daysOfTargetMonth)
+        {
+            return unitOfDay * daysOfTargetMonth;
         }
 
         private int GeFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
         {
             var totalAmount = 0;
-            var filterYearMonths = new List<DateTime>() {start, end};
+            var filterYearMonths = new List<DateTime>() { start, end };
 
             foreach (var targetDateTime in filterYearMonths)
             {
@@ -64,7 +68,21 @@ namespace Tdd.AccountingPractice
 
             return totalAmount;
         }
-        
+
+        private Budget GetBudget(DateTime start, IEnumerable<Budget> budegtList)
+        {
+            return budegtList.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
+        }
+
+        private int GetDayInTargetMonth(DateTime targetDateTime)
+        {
+            return DateTime.DaysInMonth(targetDateTime.Year, targetDateTime.Month);
+        }
+
+        private int GetDifferentDays(DateTime start, DateTime end)
+        {
+            return (end - start).Days + 1;
+        }
 
         private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
         {
@@ -86,16 +104,10 @@ namespace Tdd.AccountingPractice
             return totalAmount;
         }
 
-        private Budget GetTargetMonthBudget(IEnumerable<Budget> budgetList, DateTime targetDateTime)
-        {
-            return budgetList.FirstOrDefault(x => x.YearMonth == targetDateTime.ToString("yyyyMM"));
-        }
-
         private int GetMonthsInTargetRange(DateTime start, DateTime end)
         {
             var diffMonths = 12 * (end.Year - start.Year) + (end.Month - start.Month);
             return diffMonths;
-
         }
 
         private int GetTargetAmount(DateTime start, DateTime end, DateTime targetDateTime, int targetAmount,
@@ -113,35 +125,19 @@ namespace Tdd.AccountingPractice
             return targetAmount;
         }
 
-        private bool IsSameMonth(DateTime start, DateTime end)
+        private Budget GetTargetMonthBudget(IEnumerable<Budget> budgetList, DateTime targetDateTime)
         {
-            
-            return start.ToString("yyyyMM") == end.ToString("yyyyMM");
+            return budgetList.FirstOrDefault(x => x.YearMonth == targetDateTime.ToString("yyyyMM"));
         }
 
-        private int CalculateAmount(int unitOfDay, int daysOfTargetMonth)
+        private bool IsSameMonth(DateTime start, DateTime end)
         {
-            return unitOfDay*daysOfTargetMonth;
+            return start.ToString("yyyyMM") == end.ToString("yyyyMM");
         }
 
         private bool IsValidateDateRange(DateTime start, DateTime end)
         {
             return start <= end;
-        }
-
-        private Budget GetBudget(DateTime start, IEnumerable<Budget> budegtList)
-        {
-            return budegtList.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
-        }
-
-        private int GetDifferentDays(DateTime start,DateTime end)
-        {
-            return (end-start).Days+1;
-        }
-
-        private int GetDayInTargetMonth(DateTime targetDateTime)
-        {
-            return DateTime.DaysInMonth(targetDateTime.Year,targetDateTime.Month);
         }
     }
 }
