@@ -59,8 +59,17 @@ namespace Tdd.AccountingPractice
                 var monthOfDays = GetDayInTargetMonth(targetDateTime);
                 var unitOfDay = targetMonthBudget.Amount / monthOfDays;
                 var targetAmount = 0;
-                targetAmount = GetTargetAmount(start, end, targetDateTime, targetAmount, unitOfDay,
-                    monthOfDays);
+                int targetAmount1 = targetAmount;
+                if (targetDateTime == start)
+                {
+                    targetAmount1 = unitOfDay * (monthOfDays - targetDateTime.Day + 1);
+                }
+                else if (targetDateTime == end)
+                {
+                    targetAmount1 = unitOfDay * targetDateTime.Day;
+                }
+
+                targetAmount = targetAmount1;
                 totalAmount += targetAmount;
             }
 
@@ -101,21 +110,6 @@ namespace Tdd.AccountingPractice
         {
             var diffMonths = 12 * (end.Year - start.Year) + (end.Month - start.Month);
             return diffMonths;
-        }
-
-        private int GetTargetAmount(DateTime start, DateTime end, DateTime targetDateTime, int targetAmount,
-            int unitOfDay, int monthOfDays)
-        {
-            if (targetDateTime == start)
-            {
-                targetAmount = unitOfDay * (monthOfDays - targetDateTime.Day + 1);
-            }
-            else if (targetDateTime == end)
-            {
-                targetAmount = unitOfDay * targetDateTime.Day;
-            }
-
-            return targetAmount;
         }
 
         private bool IsSameMonth(DateTime start, DateTime end)
