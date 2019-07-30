@@ -20,14 +20,14 @@ namespace Tdd.AccountingPractice
             if (!IsValidateDateRange(start, end)) return 0;
             if (IsSameMonth(start, end))
             {
-                var targetBudgets = GetBudget(start, budgetList);
+                var budget = GetBudget(start, budgetList);
 
-                if (targetBudgets == null)
+                if (budget == null)
                 {
                     return 0;
                 }
 
-                var dailyAmount = targetBudgets.Amount / targetBudgets.DayCount();
+                var dailyAmount = budget.Amount / budget.DayCount();
                 var daysOfTargetMonth = GetDifferentDays(start, end);
 
                 return CalculateAmount(dailyAmount, daysOfTargetMonth);
