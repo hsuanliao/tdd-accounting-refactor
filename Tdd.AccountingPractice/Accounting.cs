@@ -51,15 +51,17 @@ namespace Tdd.AccountingPractice
             foreach (var targetDateTime in filterYearMonths)
             {
                 var targetMonthBudget = GetBudget(budgetList, targetDateTime);
-                if (targetMonthBudget != null)
+                if (targetMonthBudget == null)
                 {
-                    var monthOfDays = GetDayInTargetMonth(targetDateTime);
-                    var unitOfDay = targetMonthBudget.Amount / monthOfDays;
-                    var targetAmount = 0;
-                    targetAmount = GetTargetAmount(start, end, targetDateTime, targetAmount, unitOfDay,
-                        monthOfDays);
-                    totalAmount += targetAmount;
+                    totalAmount += 0;
                 }
+
+                var monthOfDays = GetDayInTargetMonth(targetDateTime);
+                var unitOfDay = targetMonthBudget.Amount / monthOfDays;
+                var targetAmount = 0;
+                targetAmount = GetTargetAmount(start, end, targetDateTime, targetAmount, unitOfDay,
+                    monthOfDays);
+                totalAmount += targetAmount;
             }
 
             return totalAmount;
