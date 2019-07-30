@@ -12,5 +12,10 @@ namespace Tdd.AccountingPractice
             var firstDay = DateTime.ParseExact($"{YearMonth}01", "yyyyMMdd", null);
             return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
         }
+
+        public DateTime LastDay()
+        {
+            return DateTime.ParseExact($"{YearMonth}{DayCount()}", "yyyyMMdd", null);
+        }
     }
 }
