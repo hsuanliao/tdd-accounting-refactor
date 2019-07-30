@@ -58,18 +58,16 @@ namespace Tdd.AccountingPractice
 
                 var dailyAmount = targetMonthBudget.Amount / targetMonthBudget.DayCount();
                 var targetAmount = 0;
-                int targetAmount1 = targetAmount;
 
                 if (targetDateTime == start)
                 {
-                    targetAmount1 = dailyAmount * (targetMonthBudget.DayCount() - targetDateTime.Day + 1);
+                    targetAmount = dailyAmount * (targetMonthBudget.DayCount() - targetDateTime.Day + 1);
                 }
                 else if (targetDateTime == end)
                 {
-                    targetAmount1 = dailyAmount * targetDateTime.Day;
+                    targetAmount = dailyAmount * targetDateTime.Day;
                 }
 
-                targetAmount = targetAmount1;
                 totalAmount += targetAmount;
             }
 
