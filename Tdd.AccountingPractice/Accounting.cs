@@ -27,10 +27,10 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                var unitOfDay = targetBudgets.Amount / GetDayInTargetMonth(start);
+                var dailyAmount = targetBudgets.Amount / targetBudgets.DayCount();
                 var daysOfTargetMonth = GetDifferentDays(start, end);
 
-                return CalculateAmount(unitOfDay, daysOfTargetMonth);
+                return CalculateAmount(dailyAmount, daysOfTargetMonth);
             }
 
             var totalAmount = 0;
