@@ -96,6 +96,22 @@ namespace Tests
         }
 
         [Test]
+        public void query_no_overlapping_after()
+        {
+            GivenBudgets(new Budget() { Amount = 280, YearMonth = "201902" });
+
+            AmountShouldBe(0, new DateTime(2019, 03, 01), new DateTime(2019, 03, 31));
+        }
+
+        [Test]
+        public void query_no_overlapping_before()
+        {
+            GivenBudgets(new Budget() { Amount = 280, YearMonth = "201902" });
+
+            AmountShouldBe(0, new DateTime(2019, 01, 01), new DateTime(2019, 01, 31));
+        }
+
+        [Test]
         public void query_single_day_of_single_budget()
         {
             GivenBudgets(new Budget() { Amount = 310, YearMonth = "201901" });
