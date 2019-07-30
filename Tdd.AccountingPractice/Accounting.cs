@@ -20,7 +20,7 @@ namespace Tdd.AccountingPractice
             if (!IsValidateDateRange(start, end)) return 0;
             if (IsSameMonth(start, end))
             {
-                var budget = GetBudget(start, budgetList);
+                var budget = GetBudget(budgetList, start);
                 if (budget == null)
                 {
                     return 0;
@@ -55,7 +55,7 @@ namespace Tdd.AccountingPractice
 
             foreach (var targetDateTime in filterYearMonths)
             {
-                var targetMonthBudget = GetTargetMonthBudget(budgetList, targetDateTime);
+                var targetMonthBudget = GetBudget(budgetList, targetDateTime);
                 if (targetMonthBudget != null)
                 {
                     var monthOfDays = GetDayInTargetMonth(targetDateTime);
@@ -70,9 +70,9 @@ namespace Tdd.AccountingPractice
             return totalAmount;
         }
 
-        private Budget GetBudget(DateTime start, IEnumerable<Budget> budegtList)
+        private Budget GetBudget(IEnumerable<Budget> budgets, DateTime target)
         {
-            return budegtList.FirstOrDefault(x => x.YearMonth == start.ToString("yyyyMM"));
+            return budgets.FirstOrDefault(x => x.YearMonth == target.ToString("yyyyMM"));
         }
 
         private int GetDayInTargetMonth(DateTime targetDateTime)
@@ -89,7 +89,7 @@ namespace Tdd.AccountingPractice
                 for (int i = 1; i < monthsInTargetRange; i++)
                 {
                     var searchMonth = start.AddMonths(i);
-                    var targetMonthBudget = GetTargetMonthBudget(budgetList, searchMonth);
+                    var targetMonthBudget = GetBudget(budgetList, searchMonth);
                     if (targetMonthBudget != null)
                     {
                         totalAmount += targetMonthBudget.Amount;
@@ -119,11 +119,6 @@ namespace Tdd.AccountingPractice
             }
 
             return targetAmount;
-        }
-
-        private Budget GetTargetMonthBudget(IEnumerable<Budget> budgetList, DateTime targetDateTime)
-        {
-            return budgetList.FirstOrDefault(x => x.YearMonth == targetDateTime.ToString("yyyyMM"));
         }
 
         private bool IsSameMonth(DateTime start, DateTime end)
