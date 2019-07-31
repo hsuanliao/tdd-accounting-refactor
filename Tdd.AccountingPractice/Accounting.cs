@@ -50,22 +50,22 @@ namespace Tdd.AccountingPractice
 
             foreach (var targetDateTime in filterYearMonths)
             {
-                var targetMonthBudget = GetBudget(budgetList, targetDateTime);
-                if (targetMonthBudget == null)
+                var budget = GetBudget(budgetList, targetDateTime);
+                if (budget == null)
                 {
                     totalAmount += 0;
                 }
 
-                var dailyAmount = targetMonthBudget.Amount / targetMonthBudget.DayCount();
+                var dailyAmount = budget.Amount / budget.DayCount();
 
                 int effectiveDays = 0;
                 if (targetDateTime == start)
                 {
-                    effectiveDays = EffectiveDayCount(targetDateTime, targetMonthBudget.LastDay());
+                    effectiveDays = EffectiveDayCount(targetDateTime, budget.LastDay());
                 }
                 else if (targetDateTime == end)
                 {
-                    effectiveDays = EffectiveDayCount(targetMonthBudget.FirstDay(), targetDateTime);
+                    effectiveDays = EffectiveDayCount(budget.FirstDay(), targetDateTime);
                 }
 
                 totalAmount += dailyAmount * effectiveDays;
