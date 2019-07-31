@@ -83,16 +83,13 @@ namespace Tdd.AccountingPractice
         {
             var monthsInTargetRange = GetMonthsInTargetRange(start, end);
             var totalAmount = 0;
-            if (monthsInTargetRange > 1)
+            for (int i = 1; i < monthsInTargetRange; i++)
             {
-                for (int i = 1; i < monthsInTargetRange; i++)
+                var searchMonth = start.AddMonths(i);
+                var targetMonthBudget = GetBudget(budgetList, searchMonth);
+                if (targetMonthBudget != null)
                 {
-                    var searchMonth = start.AddMonths(i);
-                    var targetMonthBudget = GetBudget(budgetList, searchMonth);
-                    if (targetMonthBudget != null)
-                    {
-                        totalAmount += targetMonthBudget.Amount;
-                    }
+                    totalAmount += targetMonthBudget.Amount;
                 }
             }
 
