@@ -19,18 +19,22 @@ namespace Tdd.AccountingPractice
 
             if (!IsValidateDateRange(start, end)) return 0;
 
+            var period = new Period(start, end);
             var totalAmount = 0;
-
-            var monthsInTargetRange = GetMonthsInTargetRange(start, end);
-            for (int i = 0; i <= monthsInTargetRange; i++)
+            foreach (var budget in budgetList)
             {
-                var currentDate = start.AddMonths(i);
-                var budget = GetBudget(budgetList, currentDate);
-                if (budget != null)
-                {
-                    totalAmount += budget.OverlappingAmount(new Period(start, end));
-                }
+                totalAmount += budget.OverlappingAmount(period);
             }
+            //var monthsInTargetRange = GetMonthsInTargetRange(start, end);
+            //for (int i = 0; i <= monthsInTargetRange; i++)
+            //{
+            //    var currentDate = start.AddMonths(i);
+            //    var budget = GetBudget(budgetList, currentDate);
+            //    if (budget != null)
+            //    {
+            //        totalAmount += budget.OverlappingAmount(period);
+            //    }
+            //}
 
             return totalAmount;
         }
