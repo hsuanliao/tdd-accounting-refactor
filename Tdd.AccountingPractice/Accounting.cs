@@ -31,7 +31,7 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            var filterYearMonths = new List<DateTime>() { start, end };
+            var filterYearMonths = new List<DateTime>() { end };
             foreach (var currentDate in filterYearMonths)
             {
                 var budget = GetBudget(budgetList, currentDate);
@@ -43,22 +43,22 @@ namespace Tdd.AccountingPractice
 
                 DateTime effectiveStart;
                 DateTime effectiveEnd;
-                if (currentDate == start)
-                {
-                    effectiveStart = currentDate;
-                    effectiveEnd = budget.LastDay();
-                }
-                else
-                {
-                    effectiveStart = budget.FirstDay();
-                    effectiveEnd = currentDate;
-                }
+                //if (currentDate == start)
+                //{
+                //    effectiveStart = currentDate;
+                //    effectiveEnd = budget.LastDay();
+                //}
+                //else
+                //{
+                effectiveStart = budget.FirstDay();
+                effectiveEnd = currentDate;
+                //}
 
                 totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(effectiveStart, effectiveEnd);
             }
 
             var monthsInTargetRange = GetMonthsInTargetRange(start, end);
-            for (int i = 1; i < monthsInTargetRange; i++)
+            for (int i = 0; i < monthsInTargetRange; i++)
             {
                 var currentDate = start.AddMonths(i);
                 var budget = GetBudget(budgetList, currentDate);
@@ -67,8 +67,17 @@ namespace Tdd.AccountingPractice
                     DateTime effectiveStart;
                     DateTime effectiveEnd;
 
-                    effectiveStart = budget.FirstDay();
-                    effectiveEnd = budget.LastDay();
+                    if (currentDate == start)
+                    {
+                        effectiveStart = currentDate;
+                        effectiveEnd = budget.LastDay();
+                    }
+                    else
+                    {
+                        effectiveStart = budget.FirstDay();
+                        effectiveEnd = budget.LastDay();
+                    }
+
                     totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(effectiveStart, effectiveEnd);
                 }
             }
