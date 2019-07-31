@@ -31,7 +31,33 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            totalAmount += GeFirstAndLastTotalAmounts(start, end, budgetList);
+            var filterYearMonths = new List<DateTime>() { start, end };
+            foreach (var targetDateTime in filterYearMonths)
+            {
+                var budget1 = GetBudget(budgetList, targetDateTime);
+                if (budget1 == null)
+                {
+                    totalAmount += 0;
+                    continue;
+                }
+
+                var dailyAmount = budget1.Amount / budget1.DayCount();
+
+                DateTime effectiveStart;
+                DateTime effectiveEnd;
+                if (targetDateTime == start)
+                {
+                    effectiveStart = targetDateTime;
+                    effectiveEnd = budget1.LastDay();
+                }
+                else
+                {
+                    effectiveStart = budget1.FirstDay();
+                    effectiveEnd = targetDateTime;
+                }
+
+                totalAmount += dailyAmount * EffectiveDayCount(effectiveStart, effectiveEnd);
+            }
 
             totalAmount += GetMiddleTotalAmounts(start, end, budgetList);
 
@@ -41,41 +67,6 @@ namespace Tdd.AccountingPractice
         private int EffectiveDayCount(DateTime start, DateTime end)
         {
             return (end - start).Days + 1;
-        }
-
-        private int GeFirstAndLastTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
-        {
-            var totalAmount = 0;
-            var filterYearMonths = new List<DateTime>() { start, end };
-
-            foreach (var targetDateTime in filterYearMonths)
-            {
-                var budget = GetBudget(budgetList, targetDateTime);
-                if (budget == null)
-                {
-                    totalAmount += 0;
-                    continue;
-                }
-
-                var dailyAmount = budget.Amount / budget.DayCount();
-
-                DateTime effectiveStart;
-                DateTime effectiveEnd;
-                if (targetDateTime == start)
-                {
-                    effectiveStart = targetDateTime;
-                    effectiveEnd = budget.LastDay();
-                }
-                else
-                {
-                    effectiveStart = budget.FirstDay();
-                    effectiveEnd = targetDateTime;
-                }
-
-                totalAmount += dailyAmount * EffectiveDayCount(effectiveStart, effectiveEnd);
-            }
-
-            return totalAmount;
         }
 
         private Budget GetBudget(IEnumerable<Budget> budgets, DateTime target)
