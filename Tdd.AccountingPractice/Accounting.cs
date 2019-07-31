@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Tdd.AccountingPractice
 {
@@ -13,18 +14,11 @@ namespace Tdd.AccountingPractice
 
         public double TotalAmount(DateTime start, DateTime end)
         {
-            var budgetList = budgetRepo.GetAll();
-
             if (!IsValidateDateRange(start, end)) return 0;
 
             var period = new Period(start, end);
-            var totalAmount = 0;
-            foreach (var budget in budgetList)
-            {
-                totalAmount += budget.OverlappingAmount(period);
-            }
 
-            return totalAmount;
+            return budgetRepo.GetAll().Sum(budget => budget.OverlappingAmount(period));
         }
 
         private bool IsValidateDateRange(DateTime start, DateTime end)
