@@ -17,6 +17,12 @@ namespace Tdd.AccountingPractice
             return DateTime.ParseExact($"{YearMonth}01", "yyyyMMdd", null);
         }
 
+        public Period GetPeriod()
+        {
+            var budgetPeriod = new Period(FirstDay(), LastDay());
+            return budgetPeriod;
+        }
+
         public DateTime LastDay()
         {
             return DateTime.ParseExact($"{YearMonth}{DayCount()}", "yyyyMMdd", null);
