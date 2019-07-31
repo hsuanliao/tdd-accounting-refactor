@@ -29,7 +29,7 @@ namespace Tdd.AccountingPractice
                 if (budget != null)
                 {
                     var effectiveDayCount = new Period(start, end).OverlappingDayCount(budget.GetPeriod());
-                    totalAmount += budget.Amount / budget.DayCount() * effectiveDayCount;
+                    totalAmount += budget.DailyAmount() * effectiveDayCount;
                 }
             }
 

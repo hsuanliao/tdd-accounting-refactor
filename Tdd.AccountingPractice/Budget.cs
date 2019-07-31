@@ -7,6 +7,12 @@ namespace Tdd.AccountingPractice
         public int Amount { get; set; }
         public string YearMonth { get; set; }
 
+        public int DailyAmount()
+        {
+            var dailyAmount = Amount / DayCount();
+            return dailyAmount;
+        }
+
         public int DayCount()
         {
             return DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
