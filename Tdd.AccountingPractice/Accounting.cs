@@ -26,7 +26,7 @@ namespace Tdd.AccountingPractice
                     return 0;
                 }
 
-                return budget.Amount / budget.DayCount() * EffectiveDayCount(start, end);
+                return budget.Amount / budget.DayCount() * Period.DayCount(start, end);
             }
 
             var totalAmount = 0;
@@ -44,11 +44,6 @@ namespace Tdd.AccountingPractice
             }
 
             return totalAmount;
-        }
-
-        private int EffectiveDayCount(DateTime start, DateTime end)
-        {
-            return (end - start).Days + 1;
         }
 
         private Budget GetBudget(IEnumerable<Budget> budgets, DateTime target)
@@ -98,7 +93,7 @@ namespace Tdd.AccountingPractice
                 effectiveEnd = budget.LastDay();
             }
 
-            var effectiveDayCount = EffectiveDayCount(effectiveStart, effectiveEnd);
+            var effectiveDayCount = Period.DayCount(effectiveStart, effectiveEnd);
             return effectiveDayCount;
         }
     }

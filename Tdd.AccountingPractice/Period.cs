@@ -12,5 +12,10 @@ namespace Tdd.AccountingPractice
 
         public DateTime End { get; private set; }
         public DateTime Start { get; private set; }
+
+        public static int DayCount(DateTime start, DateTime end)
+        {
+            return (end - start).Days + 1;
+        }
     }
 }
