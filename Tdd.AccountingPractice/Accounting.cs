@@ -14,16 +14,19 @@ namespace Tdd.AccountingPractice
 
         public double TotalAmount(DateTime start, DateTime end)
         {
-            if (!IsValidateDateRange(start, end)) return 0;
+            if (IsInvalidPeriod(start, end))
+            {
+                return 0;
+            }
 
             var period = new Period(start, end);
 
             return budgetRepo.GetAll().Sum(budget => budget.OverlappingAmount(period));
         }
 
-        private bool IsValidateDateRange(DateTime start, DateTime end)
+        private bool IsInvalidPeriod(DateTime start, DateTime end)
         {
-            return start <= end;
+            return start > end;
         }
     }
 }
