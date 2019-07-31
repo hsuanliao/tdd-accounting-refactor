@@ -38,26 +38,8 @@ namespace Tdd.AccountingPractice
                 var budget = GetBudget(budgetList, currentDate);
                 if (budget != null)
                 {
-                    DateTime effectiveStart;
-                    DateTime effectiveEnd;
-
-                    if (budget.YearMonth == start.ToString("yyyyMM"))
-                    {
-                        effectiveStart = start;
-                        effectiveEnd = budget.LastDay();
-                    }
-                    else if (budget.YearMonth == end.ToString("yyyyMM"))
-                    {
-                        effectiveStart = budget.FirstDay();
-                        effectiveEnd = end;
-                    }
-                    else
-                    {
-                        effectiveStart = budget.FirstDay();
-                        effectiveEnd = budget.LastDay();
-                    }
-
-                    totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(effectiveStart, effectiveEnd);
+                    var effectiveDayCount = OverlappingDayCount(start, end, budget);
+                    totalAmount += budget.Amount / budget.DayCount() * effectiveDayCount;
                 }
             }
 
@@ -93,6 +75,31 @@ namespace Tdd.AccountingPractice
         private bool IsValidateDateRange(DateTime start, DateTime end)
         {
             return start <= end;
+        }
+
+        private int OverlappingDayCount(DateTime start, DateTime end, Budget budget)
+        {
+            DateTime effectiveStart;
+            DateTime effectiveEnd;
+
+            if (budget.YearMonth == start.ToString("yyyyMM"))
+            {
+                effectiveStart = start;
+                effectiveEnd = budget.LastDay();
+            }
+            else if (budget.YearMonth == end.ToString("yyyyMM"))
+            {
+                effectiveStart = budget.FirstDay();
+                effectiveEnd = end;
+            }
+            else
+            {
+                effectiveStart = budget.FirstDay();
+                effectiveEnd = budget.LastDay();
+            }
+
+            var effectiveDayCount = EffectiveDayCount(effectiveStart, effectiveEnd);
+            return effectiveDayCount;
         }
     }
 }
