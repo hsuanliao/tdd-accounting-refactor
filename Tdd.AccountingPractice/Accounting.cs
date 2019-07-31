@@ -34,25 +34,25 @@ namespace Tdd.AccountingPractice
             var filterYearMonths = new List<DateTime>() { start, end };
             foreach (var targetDateTime in filterYearMonths)
             {
-                var budget1 = GetBudget(budgetList, targetDateTime);
-                if (budget1 == null)
+                var budget = GetBudget(budgetList, targetDateTime);
+                if (budget == null)
                 {
                     totalAmount += 0;
                     continue;
                 }
 
-                var dailyAmount = budget1.Amount / budget1.DayCount();
+                var dailyAmount = budget.Amount / budget.DayCount();
 
                 DateTime effectiveStart;
                 DateTime effectiveEnd;
                 if (targetDateTime == start)
                 {
                     effectiveStart = targetDateTime;
-                    effectiveEnd = budget1.LastDay();
+                    effectiveEnd = budget.LastDay();
                 }
                 else
                 {
-                    effectiveStart = budget1.FirstDay();
+                    effectiveStart = budget.FirstDay();
                     effectiveEnd = targetDateTime;
                 }
 
@@ -85,11 +85,11 @@ namespace Tdd.AccountingPractice
             var totalAmount = 0;
             for (int i = 1; i < monthsInTargetRange; i++)
             {
-                var searchMonth = start.AddMonths(i);
-                var targetMonthBudget = GetBudget(budgetList, searchMonth);
-                if (targetMonthBudget != null)
+                var currentDate = start.AddMonths(i);
+                var budget = GetBudget(budgetList, currentDate);
+                if (budget != null)
                 {
-                    totalAmount += targetMonthBudget.Amount;
+                    totalAmount += budget.Amount;
                 }
             }
 
