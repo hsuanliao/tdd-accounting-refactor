@@ -41,8 +41,6 @@ namespace Tdd.AccountingPractice
                     continue;
                 }
 
-                var dailyAmount = budget.Amount / budget.DayCount();
-
                 DateTime effectiveStart;
                 DateTime effectiveEnd;
                 if (targetDateTime == start)
@@ -56,7 +54,7 @@ namespace Tdd.AccountingPractice
                     effectiveEnd = targetDateTime;
                 }
 
-                totalAmount += dailyAmount * EffectiveDayCount(effectiveStart, effectiveEnd);
+                totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(effectiveStart, effectiveEnd);
             }
 
             var monthsInTargetRange = GetMonthsInTargetRange(start, end);
