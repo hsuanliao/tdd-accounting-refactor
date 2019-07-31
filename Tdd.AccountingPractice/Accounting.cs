@@ -59,21 +59,20 @@ namespace Tdd.AccountingPractice
 
                 var dailyAmount = budget.Amount / budget.DayCount();
 
-                int effectiveDays = 0;
+                DateTime effectiveStart;
+                DateTime effectiveEnd;
                 if (targetDateTime == start)
                 {
-                    var effectiveStart = targetDateTime;
-                    var effectiveEnd = budget.LastDay();
-                    effectiveDays = EffectiveDayCount(effectiveStart, effectiveEnd);
+                    effectiveStart = targetDateTime;
+                    effectiveEnd = budget.LastDay();
                 }
-                else if (targetDateTime == end)
+                else
                 {
-                    var effectiveStart = budget.FirstDay();
-                    var effectiveEnd = targetDateTime;
-                    effectiveDays = EffectiveDayCount(effectiveStart, effectiveEnd);
+                    effectiveStart = budget.FirstDay();
+                    effectiveEnd = targetDateTime;
                 }
 
-                totalAmount += dailyAmount * effectiveDays;
+                totalAmount += dailyAmount * EffectiveDayCount(effectiveStart, effectiveEnd);
             }
 
             return totalAmount;
