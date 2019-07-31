@@ -54,6 +54,7 @@ namespace Tdd.AccountingPractice
                 if (budget == null)
                 {
                     totalAmount += 0;
+                    continue;
                 }
 
                 var dailyAmount = budget.Amount / budget.DayCount();
