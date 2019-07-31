@@ -18,16 +18,6 @@ namespace Tdd.AccountingPractice
             var budgetList = budgetRepo.GetAll();
 
             if (!IsValidateDateRange(start, end)) return 0;
-            if (IsSameMonth(start, end))
-            {
-                var budget = GetBudget(budgetList, start);
-                if (budget == null)
-                {
-                    return 0;
-                }
-
-                return budget.Amount / budget.DayCount() * Period.DayCount(start, end);
-            }
 
             var totalAmount = 0;
 
