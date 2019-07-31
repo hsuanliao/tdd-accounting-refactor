@@ -59,7 +59,16 @@ namespace Tdd.AccountingPractice
                 totalAmount += dailyAmount * EffectiveDayCount(effectiveStart, effectiveEnd);
             }
 
-            totalAmount += GetMiddleTotalAmounts(start, end, budgetList);
+            var monthsInTargetRange = GetMonthsInTargetRange(start, end);
+            for (int i = 1; i < monthsInTargetRange; i++)
+            {
+                var currentDate = start.AddMonths(i);
+                var budget = GetBudget(budgetList, currentDate);
+                if (budget != null)
+                {
+                    totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(budget.FirstDay(), budget.LastDay());
+                }
+            }
 
             return totalAmount;
         }
@@ -77,23 +86,6 @@ namespace Tdd.AccountingPractice
         private int GetDayInTargetMonth(DateTime targetDateTime)
         {
             return DateTime.DaysInMonth(targetDateTime.Year, targetDateTime.Month);
-        }
-
-        private int GetMiddleTotalAmounts(DateTime start, DateTime end, IEnumerable<Budget> budgetList)
-        {
-            var monthsInTargetRange = GetMonthsInTargetRange(start, end);
-            var totalAmount = 0;
-            for (int i = 1; i < monthsInTargetRange; i++)
-            {
-                var currentDate = start.AddMonths(i);
-                var budget = GetBudget(budgetList, currentDate);
-                if (budget != null)
-                {
-                    totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(budget.FirstDay(), budget.LastDay());
-                }
-            }
-
-            return totalAmount;
         }
 
         private int GetMonthsInTargetRange(DateTime start, DateTime end)
