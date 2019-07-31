@@ -13,11 +13,6 @@ namespace Tdd.AccountingPractice
         public DateTime End { get; private set; }
         public DateTime Start { get; private set; }
 
-        public static int DayCount(DateTime start, DateTime end)
-        {
-            return (end - start).Days + 1;
-        }
-
         public int OverlappingDayCount(Period another)
         {
             var effectiveStart = Start > another.Start
@@ -28,6 +23,11 @@ namespace Tdd.AccountingPractice
                 : another.End;
 
             return DayCount(effectiveStart, effectiveEnd);
+        }
+
+        private static int DayCount(DateTime start, DateTime end)
+        {
+            return (end - start).Days + 1;
         }
     }
 }
