@@ -38,7 +38,7 @@ namespace Tdd.AccountingPractice
                 var budget = GetBudget(budgetList, currentDate);
                 if (budget != null)
                 {
-                    var effectiveDayCount = OverlappingDayCount(new Period(start, end), budget);
+                    var effectiveDayCount = new Period(start, end).OverlappingDayCount(budget);
                     totalAmount += budget.Amount / budget.DayCount() * effectiveDayCount;
                 }
             }
@@ -70,31 +70,6 @@ namespace Tdd.AccountingPractice
         private bool IsValidateDateRange(DateTime start, DateTime end)
         {
             return start <= end;
-        }
-
-        private int OverlappingDayCount(Period period, Budget budget)
-        {
-            DateTime effectiveStart;
-            DateTime effectiveEnd;
-
-            if (budget.YearMonth == period.Start.ToString("yyyyMM"))
-            {
-                effectiveStart = period.Start;
-                effectiveEnd = budget.LastDay();
-            }
-            else if (budget.YearMonth == period.End.ToString("yyyyMM"))
-            {
-                effectiveStart = budget.FirstDay();
-                effectiveEnd = period.End;
-            }
-            else
-            {
-                effectiveStart = budget.FirstDay();
-                effectiveEnd = budget.LastDay();
-            }
-
-            var effectiveDayCount = Period.DayCount(effectiveStart, effectiveEnd);
-            return effectiveDayCount;
         }
     }
 }

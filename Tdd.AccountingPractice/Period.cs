@@ -17,5 +17,30 @@ namespace Tdd.AccountingPractice
         {
             return (end - start).Days + 1;
         }
+
+        public int OverlappingDayCount(Budget budget)
+        {
+            DateTime effectiveStart;
+            DateTime effectiveEnd;
+
+            if (budget.YearMonth == Start.ToString("yyyyMM"))
+            {
+                effectiveStart = Start;
+                effectiveEnd = budget.LastDay();
+            }
+            else if (budget.YearMonth == End.ToString("yyyyMM"))
+            {
+                effectiveStart = budget.FirstDay();
+                effectiveEnd = End;
+            }
+            else
+            {
+                effectiveStart = budget.FirstDay();
+                effectiveEnd = budget.LastDay();
+            }
+
+            var effectiveDayCount = DayCount(effectiveStart, effectiveEnd);
+            return effectiveDayCount;
+        }
     }
 }
