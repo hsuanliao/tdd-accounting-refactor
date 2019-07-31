@@ -89,7 +89,7 @@ namespace Tdd.AccountingPractice
                 var budget = GetBudget(budgetList, currentDate);
                 if (budget != null)
                 {
-                    totalAmount += budget.Amount;
+                    totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(budget.FirstDay(), budget.LastDay());
                 }
             }
 
