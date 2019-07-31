@@ -31,32 +31,6 @@ namespace Tdd.AccountingPractice
 
             var totalAmount = 0;
 
-            //var filterYearMonths = new List<DateTime>() { };
-            //foreach (var currentDate in filterYearMonths)
-            //{
-            //    var budget = GetBudget(budgetList, currentDate);
-            //    if (budget == null)
-            //    {
-            //        totalAmount += 0;
-            //        continue;
-            //    }
-
-            //    DateTime effectiveStart;
-            //    DateTime effectiveEnd;
-            //    if (currentDate == start)
-            //    {
-            //        effectiveStart = currentDate;
-            //        effectiveEnd = budget.LastDay();
-            //    }
-            //    else
-            //    {
-            //        effectiveStart = budget.FirstDay();
-            //        effectiveEnd = currentDate;
-            //    }
-
-            //    totalAmount += budget.Amount / budget.DayCount() * EffectiveDayCount(effectiveStart, effectiveEnd);
-            //}
-
             var monthsInTargetRange = GetMonthsInTargetRange(start, end);
             for (int i = 0; i <= monthsInTargetRange; i++)
             {
