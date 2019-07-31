@@ -33,5 +33,10 @@ namespace Tdd.AccountingPractice
         {
             return DateTime.ParseExact($"{YearMonth}{DayCount()}", "yyyyMMdd", null);
         }
+
+        public int OverlappingAmount(Period period)
+        {
+            return DailyAmount() * period.OverlappingDayCount(GetPeriod());
+        }
     }
 }
