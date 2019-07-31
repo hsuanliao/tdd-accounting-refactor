@@ -41,9 +41,9 @@ namespace Tdd.AccountingPractice
                     DateTime effectiveStart;
                     DateTime effectiveEnd;
 
-                    if (currentDate == start)
+                    if (IsSameMonth(currentDate, start))
                     {
-                        effectiveStart = currentDate;
+                        effectiveStart = start;
                         effectiveEnd = budget.LastDay();
                     }
                     else if (IsSameMonth(currentDate, end))
